@@ -19,7 +19,7 @@ spring:
       #ddl-auto: update
   datasource:
     platform: postgres
-    url: jdbc:postgresql://localhost:5432/seven-sides
+    url: jdbc:postgresql://localhost:5432/ofarmer
     username: postgres
     password: password
     driverClassName: org.postgresql.Driver
