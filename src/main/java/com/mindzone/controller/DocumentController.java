@@ -19,7 +19,7 @@ public class DocumentController {
     private DocumentService documentService;
 
     @PostMapping
-    public boolean upload(@RequestParam("file") MultipartFile file) throws IOException {
+    public boolean upload(@RequestParam("file") MultipartFile file) {
          return documentService.upload(file);
     }
     @GetMapping(path = "/{name}")
