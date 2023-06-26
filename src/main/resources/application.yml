@@ -1,16 +1,24 @@
 server:
   port: 8080
   servlet:
+#APP ROOT CONTEXT PATH. URI- http://localhost:8080/mindzoneitsolutions
     context-path: /mindzoneitsolutions
+#UPLOAD FILE THRESHOLD
+    multipart:
+      max-file-size: 20MB
 
 spring:
+#APP NAME
+  application:
+    name: Mind Zone IT Solutions
+
   mvc:
     pathmatch:
       matching-strategy: ANT_PATH_MATCHER
-  application:
-    name: Mind Zone IT Solutions
+# ISO-DATE FORMAT
     format:
       date-time: iso
+# DATABASE CONFIGURATIONS
   jpa:
     show-sql: true
     database: POSTGRESQL
@@ -19,7 +27,11 @@ spring:
       #ddl-auto: update
   datasource:
     platform: postgres
-    url: jdbc:postgresql://localhost:5432/ofarmer
+    url: jdbc:postgresql://localhost:5432/seven-sides
     username: postgres
     password: password
     driverClassName: org.postgresql.Driver
+#File folder
+upload:
+  path: resources/uploads
+

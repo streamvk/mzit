@@ -28,8 +28,6 @@ public class StudentServiceImpl implements StudentService {
     @Autowired
     private StudentMapper studentMapper;
 
-    @Autowired
-    private MZUtils mzUtils;
 
 
     @Override
@@ -37,7 +35,7 @@ public class StudentServiceImpl implements StudentService {
 
         Students student = studentMapper.toEntity(studentRequestDto);
         //Change generate id logic as required.
-        long studentId = mzUtils.generateId();
+        long studentId = MZUtils.generateId();
         student.setStudentId(studentId);
 
         Students savedStudent = repository.save(student);

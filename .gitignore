@@ -1,0 +1,16 @@
+/.classpath
+/.project
+/.settings/
+/.gradle/
+/.idea/
+/build/
+/bin/
+
+##IntelliJ IDEA##
+.idea
+*.iws
+*.impl
+*.ipr
+
+*/build/*
+**/pithashfile.txt

@@ -2,10 +2,10 @@ package com.mindzone.utils;
 
 import com.mindzone.entity.Students;
 import com.mindzone.repository.StudentRepository;
+import lombok.experimental.UtilityClass;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
 
-@Component
+@UtilityClass
 public class MZUtils {
 
     @Autowired

@@ -8,4 +8,5 @@ public interface MZConstants {
     String URI = APP + VERSION;
 
     String STUDENTS = "/students";
+    String DOCUMENT = "/documents";
 }
