@@ -23,10 +23,10 @@ public class DocumentServiceImpl implements DocumentService {
     private HttpServletResponse response;
 
     @Override
-    public boolean upload(MultipartFile file) {
+    public String upload(MultipartFile file) {
         try (FileOutputStream fileOutputStream = new FileOutputStream(file.getOriginalFilename())) {
             fileOutputStream.write(file.getBytes());
-            return true;
+            return file.getOriginalFilename();
         } catch (IOException ex) {
             log.error("Exception to upload the file {}", ex);
             throw new RuntimeException("Fail to upload file.");

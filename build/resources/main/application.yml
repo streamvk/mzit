@@ -1,16 +1,16 @@
 server:
   port: 8080
   servlet:
+#APP ROOT CONTEXT PATH. URI- http://localhost:8080/mindzoneitsolutions
     context-path: /mindzoneitsolutions
-
-spring:
-
-  application:
-    name: Mind Zone IT Solutions
-
-  servlet:
+#UPLOAD FILE THRESHOLD
     multipart:
       max-file-size: 20MB
+
+spring:
+#APP NAME
+  application:
+    name: Mind Zone IT Solutions
 
   mvc:
     pathmatch:
