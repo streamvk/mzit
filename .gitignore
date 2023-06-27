@@ -2,8 +2,10 @@
 /.project
 /.settings/
 /.gradle/
+.gradle
 /.idea/
 /build/
+build
 /bin/
 
 ##IntelliJ IDEA##

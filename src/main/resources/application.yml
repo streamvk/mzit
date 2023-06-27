@@ -31,7 +31,7 @@ spring:
     username: postgres
     password: password
     driverClassName: org.postgresql.Driver
-#File folder
-upload:
-  path: resources/uploads
+#FILE PATH
+file:
+  path: /Users/vivekrathi/Desktop/vkstream/docs/Mind Zone
 
