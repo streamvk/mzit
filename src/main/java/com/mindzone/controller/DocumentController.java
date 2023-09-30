@@ -26,4 +26,10 @@ public class DocumentController {
     public void download(@PathVariable(name = "name") String name){
         documentService.download(name);
     }
+
+    @GetMapping(path = "/docx-to-pdf/{fileName}")
+    public void docToPdf(@PathVariable(name = "fileName") String fileName){
+        documentService.docToPdf(fileName);
+    }
+
 }
