@@ -1,13 +1,8 @@
 package com.mindzone.service.impl;
 
-import com.itextpdf.text.Document;
-import com.itextpdf.text.DocumentException;
-import com.itextpdf.text.Paragraph;
-import com.itextpdf.text.pdf.PdfWriter;
+import com.aspose.words.Document;
 import com.mindzone.service.DocumentService;
 import lombok.extern.slf4j.Slf4j;
-import org.apache.poi.xwpf.usermodel.XWPFDocument;
-import org.apache.poi.xwpf.usermodel.XWPFParagraph;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.io.ResourceLoader;
@@ -17,12 +12,14 @@ import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.io.*;
+import java.io.BufferedInputStream;
+import java.io.File;
+import java.io.IOException;
+import java.io.InputStream;
 import java.net.URLConnection;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.List;
 
 @Service
 @Slf4j
@@ -43,20 +40,20 @@ public class DocumentServiceImpl implements DocumentService {
     @Override
     public String upload(MultipartFile file) {
         try {
-           byte[] fileBytes = file.getBytes();
-           Path path = Paths.get(filePath,file.getOriginalFilename());
-            Files.write(path,fileBytes);
+            byte[] fileBytes = file.getBytes();
+            Path path = Paths.get(filePath, file.getOriginalFilename());
+            Files.write(path, fileBytes);
             return file.getOriginalFilename();
         } catch (IOException ex) {
-            log.error("Exception to upload the file {}", ex);
-            throw new RuntimeException("Fail to upload file.");
+            log.error("Exception occurred when uploading the file::", ex);
+            throw new RuntimeException("Failed to upload the file.");
         }
     }
 
     @Override
     public void download(String name) {
         try {
-            File file = new File(filePath+"/"+ name);
+            File file = new File(filePath + "/" + name);
             if (file.exists()) {
                 String mimeType = URLConnection.guessContentTypeFromName(file.getName());
                 if (mimeType == null) {
@@ -76,19 +73,13 @@ public class DocumentServiceImpl implements DocumentService {
     }
 
     @Override
-    public void docToPdf(String fileName) {
-        String  fileNameWithExtension = fileName.split("\\.")[0];
-        try (InputStream docxInputStream = Files.newInputStream(Paths.get(filePath+"/"+ fileName)); XWPFDocument document = new XWPFDocument(docxInputStream); OutputStream pdfOutputStream = Files.newOutputStream(Paths.get(filePath+"/"+ fileNameWithExtension+".pdf"))) {
-            Document pdfDocument = new Document();
-            PdfWriter.getInstance(pdfDocument, pdfOutputStream);
-            pdfDocument.open();
-
-            List<XWPFParagraph> paragraphs = document.getParagraphs();
-            for (XWPFParagraph paragraph : paragraphs) {
-                pdfDocument.add(new Paragraph(paragraph.getText()));
-            }
-            pdfDocument.close();
-        } catch (IOException | DocumentException e) {
+    public void docxToPdf(String fileName) {
+        Document doc;
+        String fileNameWithOutExtension = fileName.split("\\.")[0];
+        try {
+            doc = new Document(filePath + "/" + fileName);
+            doc.save(fileNameWithOutExtension + ".pdf");
+        } catch (Exception e) {
             throw new RuntimeException(e);
         }
     }

@@ -28,8 +28,8 @@ public class DocumentController {
     }
 
     @GetMapping(path = "/docx-to-pdf/{fileName}")
-    public void docToPdf(@PathVariable(name = "fileName") String fileName){
-        documentService.docToPdf(fileName);
+    public void docxToPdf(@PathVariable(name = "fileName") String fileName){
+        documentService.docxToPdf(fileName);
     }
 
 }
